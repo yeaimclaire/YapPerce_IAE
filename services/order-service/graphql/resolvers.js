@@ -334,6 +334,21 @@ const resolvers = {
   },
 
   Order: {
+    order_date: (parent) => {
+      // Ensure date is returned as ISO string
+      if (parent.order_date instanceof Date) {
+        return parent.order_date.toISOString();
+      }
+      // If it's a string, ensure it's valid ISO format
+      if (typeof parent.order_date === 'string') {
+        const date = new Date(parent.order_date);
+        if (!isNaN(date.getTime())) {
+          return date.toISOString();
+        }
+      }
+      return parent.order_date;
+    },
+
     user: async (parent) => {
       return await fetchUser(parent.user_id);
     },

@@ -1,23 +1,31 @@
-# YapPerce Marketplace - Microservices Architecture
+ # YapPerce Marketplace - Microservices Architecture
 
 Sistem marketplace berbasis microservices yang terintegrasi dengan sistem logistik ShipXpress.
 
 ## Arsitektur Sistem
 
-Sistem ini terdiri dari 4 layanan utama:
+Sistem ini terdiri dari 4 layanan utama dan 1 frontend:
 
 1. **User Service** (Port 4001): Mengelola pendaftaran pengguna, autentikasi, dan pengelolaan data pengguna
 2. **Product Service** (Port 4002): Mengelola katalog produk, kategori, dan stok
 3. **Order Service** (Port 4003): Mengelola pemesanan, status pesanan, dan integrasi dengan ShipXpress
 4. **Payment Service** (Port 4004): Mengelola proses pembayaran dan status pembayaran
+5. **Frontend** (Port 3000): Aplikasi web Next.js untuk user interface
 
 ## Teknologi yang Digunakan
 
+**Backend Services:**
 - **Node.js** dengan Express
 - **Apollo Server** untuk GraphQL
 - **MySQL** untuk database
 - **Docker** dan **Docker Compose** untuk containerization
 - **JWT** untuk autentikasi
+
+**Frontend:**
+- **Next.js 14** dengan React
+- **Apollo Client** untuk GraphQL
+- **Tailwind CSS** untuk styling
+- **Zustand** untuk state management
 
 ## Prasyarat
 
@@ -65,6 +73,7 @@ docker-compose exec payment-service npm run seed
 
 Setelah sistem berjalan, Anda dapat mengakses:
 
+- **Frontend Web App**: http://localhost:3000
 - **User Service GraphQL**: http://localhost:4001/graphql
 - **Product Service GraphQL**: http://localhost:4002/graphql
 - **Order Service GraphQL**: http://localhost:4003/graphql
@@ -82,12 +91,14 @@ Setelah sistem berjalan, Anda dapat mengakses:
 
 ```
 YapPerce_Marketplace/
+├── frontend/              # Next.js frontend application
 ├── services/
 │   ├── user-service/
 │   ├── product-service/
 │   ├── order-service/
 │   ├── payment-service/
 │   └── shipxpress-mock/
+├── scripts/              # Seed scripts
 ├── docker-compose.yml
 └── README.md
 ```

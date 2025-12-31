@@ -149,6 +149,25 @@ services:
     networks:
       - marketplace-network
 
+  # Frontend Service
+  frontend:
+    build: ./frontend
+    container_name: frontend
+    ports:
+      - "3000:3000"
+    environment:
+      - NEXT_PUBLIC_USER_SERVICE_URL=http://localhost:4001/graphql
+      - NEXT_PUBLIC_PRODUCT_SERVICE_URL=http://localhost:4002/graphql
+      - NEXT_PUBLIC_ORDER_SERVICE_URL=http://localhost:4003/graphql
+      - NEXT_PUBLIC_PAYMENT_SERVICE_URL=http://localhost:4004/graphql
+    depends_on:
+      - user-service
+      - product-service
+      - order-service
+      - payment-service
+    networks:
+      - marketplace-network
+
 volumes:
   user-db-data:
   product-db-data:
